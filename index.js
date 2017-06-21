@@ -2,7 +2,32 @@ const stringToArray = string => string.split(',')
   .map(s => s.trim())
   .filter(s => s);
 
-const recipes = [{
+const RecipeStorage = {
+  get: function() {
+    const strRecipes = localStorage.getItem('zsVueRecipes');
+    let recipes;
+
+    try {
+      recipes = JSON.parse(strRecipes);
+    } catch (e) {
+      console.error(e.message);
+    }
+
+    return Array.isArray(recipes) ? recipes : [];
+  },
+  set: function(newRecipes) {
+    if (Array.isArray(newRecipes)) {
+      localStorage.setItem('zsVueRecipes', JSON.stringify(newRecipes));
+      return newRecipes;
+    }
+    return undefined;
+  },
+  wipe: function() {
+    localStorage.removeItem('zsVueRecipes');
+  },
+};
+
+const defaultRecipes = [{
     id: 1,
     name: 'Apple Pie',
     image: 'http://media.istockphoto.com/photos/homemade-organic-apple-pie-dessert-picture-id450752471?k=6&m=450752471&s=612x612&w=0&h=ye2J_VZk0e5K3gx4SbzQDMkBZOPOnRJVEX9U1aGI72M=',
@@ -151,9 +176,18 @@ new Vue({
     image: null,
     ingredients: null,
     name: null,
-    recipes: recipes,
+    recipes: [],
     showModal: false,
     time: null,
+  },
+  mounted: function() {
+    const recipes = RecipeStorage.get();
+    this.recipes = recipes.length ? recipes : defaultRecipes;
+  },
+  watch: {
+    recipes: function(val) {
+      RecipeStorage.set(val);
+    },
   },
   methods: {
     deleteRecipe: function(id) {

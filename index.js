@@ -146,7 +146,7 @@ new Vue({
   el: '#app',
   data: {
     activeModal: null,
-    activeRecipe: null,
+    activeRecipe: 3,
     calories: null,
     image: null,
     ingredients: null,
@@ -159,12 +159,18 @@ new Vue({
     deleteRecipe: function(id) {
       this.recipes = this.recipes.filter(recipe => recipe.id !== id);
     },
+    handleFormSubmit: function() {
+      if (this.activeModal === 'add') {
+        this.add();
+      } else if (this.activeModal === 'edit') {
+        this.edit();
+      }
+    },
     openAddRecipe: function() {
       this.showModal = true;
       this.activeModal = 'add';
     },
     add: function() {
-      console.log(this.name, this.ingredients);
       const recipe = {
         id: Math.random(),
         name: this.name,
@@ -174,7 +180,35 @@ new Vue({
         calories: this.calories,
       };
       this.recipes.push(recipe);
-      // this.setItem('zsueRecipes', this.recipes);
+      this.resetForm();
+      this.showModal = false;
+    },
+    openEditRecipe: function(id) {
+      const recipe = this.recipes.find(recipe => recipe.id === id);
+
+      this.showModal = true;
+      this.activeModal = 'edit';
+      this.activeRecipe = id;
+      this.calories = recipe.calories;
+      this.image = recipe.image;
+      this.ingredients = recipe.ingredients.join(', ');
+      this.name = recipe.name;
+      this.time = recipe.time;
+    },
+    edit: function() {
+      this.recipes = this.recipes.map((recipe) => {
+        if (recipe.id === this.activeRecipe) {
+          return {
+            id: this.activeRecipe,
+            name: this.name,
+            ingredients: stringToArray(this.ingredients),
+            image: this.image,
+            time: this.time,
+            calories: this.calories,
+          };
+        }
+        return recipe;
+      });
       this.resetForm();
       this.showModal = false;
     },

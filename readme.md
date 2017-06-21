@@ -4,7 +4,7 @@ This is the third day of my [Vue.js challenge](https://github.com/zsoltime/vue-b
 
 ### User Stories
 
-- [ ] I can create recipes that have names and ingredients
+- [x] I can create recipes that have names and ingredients
 - [x] I can see an index view where the names of all the recipes are visible
 - [ ] I can click into any of those recipes to view it
 - [ ] I can edit these recipes

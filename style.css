@@ -44,15 +44,18 @@ button:focus {
   outline: thin dotted;
 }
 
+::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+
 .container {
   margin: 0 auto;
   max-width: 1200px;
-  padding: 0 1rem;
   width: 100%;
 }
 
 .page__header {
-  background: #addd80;
+  background-color: #addd80;
   padding: 1rem 0;
   text-align: center;
 }
@@ -219,4 +222,118 @@ button:focus {
 
 [v-cloak] {
   display: none;
+}
+
+.modal,
+.modal__overlay {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.modal__overlay {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.modal__wrapper {
+  align-items: center;
+  background-color: #addd80;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 20rem;
+  padding: 1rem;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.75,-0.15, 0.5, 2);
+  transition-delay: 0.1s;
+  width: 90%;
+  z-index: 100;
+}
+
+.modal__title {
+  font-weight: 300;
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.modal__btn {
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  font-size: 1.5rem;
+  height: 1.25rem;
+  justify-content: center;
+  line-height: 1rem;
+  padding: 0;
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  transform-origin: 50% 50%;
+  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  width: 1.25rem;
+}
+
+.modal__btn--close:hover {
+  transform: scale(1.25);
+}
+
+.modal-enter .modal__overlay,
+.modal-leave-to .modal__overlay {
+  opacity: 0;
+}
+
+.modal-enter .modal__wrapper,
+.modal-leave-to .modal__wrapper {
+  opacity: 0;
+  transform: scale(0.75);
+}
+
+.recipe-form {
+  margin-bottom: 1rem;
+}
+
+.recipe-form__field {
+  border: 0;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.recipe-form__field:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+.recipe-form__label {
+  display: none;
+}
+
+.recipe-form__btn {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 0;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.btn--add-recipe {
+  background-color: #fff;
+  border: 0;
+  border-radius: 50%;
+  bottom: 3rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  color: #addd80;
+  height: 2.5rem;
+  padding: 0;
+  position: fixed;
+  right: 1rem;
+  width: 2.5rem;
+  z-index: 9;
 }

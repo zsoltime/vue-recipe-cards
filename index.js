@@ -1,3 +1,7 @@
+const stringToArray = string => string.split(',')
+  .map(s => s.trim())
+  .filter(s => s);
+
 const recipes = [{
     id: 1,
     name: 'Apple Pie',
@@ -86,6 +90,23 @@ const recipes = [{
     ],
   }, {
     id: 7,
+    name: 'Baked Beans',
+    image: 'http://media.istockphoto.com/photos/baked-beans-picture-id184942645?k=6&m=184942645&s=612x612&w=0&h=srIa1NuTg1STAuMNErjQw_vt3jtYwaGgD9pChtVzt0U=',
+    time: 100,
+    calories: 400,
+    ingredients: [
+      'white beans',
+      'bacon',
+      'onion',
+      'cloves',
+      'tomatoes',
+      'sugar',
+      'vinegar',
+      'pepper',
+      'salt',
+    ],
+  }, {
+    id: 8,
     name: 'Fish and Chips',
     image: 'http://media.istockphoto.com/photos/homemade-fish-chips-and-sauce-picture-id179035570?k=6&m=179035570&s=612x612&w=0&h=SdjgCYcpSC8Z5C3HgXlimfkCK2kJbW8CKXcvVG4oNRU=',
     time: 55,
@@ -101,7 +122,7 @@ const recipes = [{
       'potatoes',
     ],
   }, {
-    id: 8,
+    id: 9,
     name: 'Dutch Baby Pancake',
     image: 'http://media.istockphoto.com/photos/sweet-berry-skillet-dutch-baby-pancake-picture-id637916884?k=6&m=637916884&s=612x612&w=0&h=0yvY1tcc4eC9qH_zf0tloFiOhKyQ5CoW3KIAQVFSOgM=',
     time: 45,
@@ -117,15 +138,52 @@ const recipes = [{
     ],
   }];
 
+Vue.component('modal', {
+  template: '#modal-template',
+});
+
 new Vue({
   el: '#app',
   data: {
+    activeModal: null,
+    activeRecipe: null,
+    calories: null,
+    image: null,
+    ingredients: null,
+    name: null,
     recipes: recipes,
     showModal: false,
+    time: null,
   },
   methods: {
     deleteRecipe: function(id) {
       this.recipes = this.recipes.filter(recipe => recipe.id !== id);
+    },
+    openAddRecipe: function() {
+      this.showModal = true;
+      this.activeModal = 'add';
+    },
+    add: function() {
+      console.log(this.name, this.ingredients);
+      const recipe = {
+        id: Math.random(),
+        name: this.name,
+        ingredients: stringToArray(this.ingredients),
+        image: this.image,
+        time: this.time,
+        calories: this.calories,
+      };
+      this.recipes.push(recipe);
+      // this.setItem('zsueRecipes', this.recipes);
+      this.resetForm();
+      this.showModal = false;
+    },
+    resetForm: function() {
+      this.name = null;
+      this.ingredients = null;
+      this.image = null;
+      this.time = null;
+      this.calories = null;
     },
   },
 });

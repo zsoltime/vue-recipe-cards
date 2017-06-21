@@ -47,6 +47,13 @@
             <span class="card__stat card__stat--calories">{{recipe.calories}}kcal</span>
             <span class="card__stat card__stat--ingredients">{{recipe.ingredients.length}} ingredients</span>
           </footer>
+          <button
+            class="card__btn card__btn--delete"
+            aria-label="Delete recipe"
+            @click="deleteRecipe(recipe.id)"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
       </div>
     </section>

@@ -123,4 +123,9 @@ new Vue({
     recipes: recipes,
     showModal: false,
   },
+  methods: {
+    deleteRecipe: function(id) {
+      this.recipes = this.recipes.filter(recipe => recipe.id !== id);
+    },
+  },
 });

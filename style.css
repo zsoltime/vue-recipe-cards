@@ -167,6 +167,32 @@ button:focus {
   transform: rotate(-60deg);
 }
 
+.card__btn {
+  border: 0;
+}
+
+.card__btn--delete {
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  font-size: 1.5rem;
+  height: 1.25rem;
+  justify-content: center;
+  line-height: 1rem;
+  padding: 0;
+  position: absolute;
+  top: .25rem;
+  right: .25rem;
+  transform-origin: 50% 50%;
+  transition: color .2s ease-in-out, transform .2s ease-in-out;
+  width: 1.25rem;
+}
+
+.card__btn--delete:hover {
+  color: #f44433;
+  transform: scale(1.5);
+}
+
 .copyright {
   color: rgba(255, 255, 255, 0.9);
   font-size: 0.75rem;

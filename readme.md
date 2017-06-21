@@ -1,11 +1,11 @@
-# Day 3 of My Vue.js Challenge
+# Day 3 of My Vue.js Challenge
 
 This is the third day of my [Vue.js challenge](https://github.com/zsoltime/vue-basic-challenge), bringing you the Free Code Camp recipe box app.
 
 ### User Stories
 
 - [ ] I can create recipes that have names and ingredients
-- [ ] I can see an index view where the names of all the recipes are visible
+- [x] I can see an index view where the names of all the recipes are visible
 - [ ] I can click into any of those recipes to view it
 - [ ] I can edit these recipes
 - [ ] I can delete these recipes

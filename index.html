@@ -18,6 +18,9 @@
     </header>
     <section class="container">
       <div class="recipes" v-cloak>
+        <div class="message message--info" v-if="recipes.length === 0">
+          This list seems to be empty...
+        </div>
         <div
           class="card"
           v-for="recipe in recipes"
